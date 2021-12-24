@@ -40,15 +40,20 @@ public class Spawn : MonoBehaviour
             Vector3 spawnPos = previousTilePosition + distanceBetweenTiles * direction;
             startTime = Time.time;
             int R = (int)Random.Range(0, 4);
-            if ( R == 2 && !empty)
+            if (R == 2)
             {
-                empty = true;
-                if((int)Random.Range(0, 2) == 1)
-                    Instantiate(non, spawnPos, Quaternion.Euler(0, 0, 0));
+
+                if (!empty)
+                    if ((int)Random.Range(0, 2) == 1)
+                        Instantiate(non, spawnPos, Quaternion.Euler(0, 0, 0));
+                    else
+                        Instantiate(trap, spawnPos, Quaternion.Euler(0, 0, 0));
                 else
-                    Instantiate(trap, spawnPos, Quaternion.Euler(0, 0, 0));
+                    Instantiate(tile, spawnPos, Quaternion.Euler(0, 0, 0));
+                if (!empty)
+                    empty = true;
             }
-            else if(R == 1)
+            else if (R == 1)
             {
                 Instantiate(coin, spawnPos, Quaternion.Euler(0, 0, 0));
                 empty = false;
@@ -58,7 +63,7 @@ public class Spawn : MonoBehaviour
                 Instantiate(tile, spawnPos, Quaternion.Euler(0, 0, 0));
                 empty = false;
             }
-            
+
             previousTilePosition = spawnPos;
         }
     }

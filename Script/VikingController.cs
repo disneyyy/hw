@@ -52,14 +52,16 @@ public class VikingController : MonoBehaviour
         vertical = transform.localPosition.y;
         if (run)
         {
-            
-            if (vertical < 100.0) Debug.Log("45646584654");
+
+            if (vertical < 100.0) ;
             degree %= 4;
-            if (Input.GetKeyDown(KeyCode.Space) && vertical < 1 && vertical > -1)
+            if (Input.GetKeyDown(KeyCode.Space) && vertical < 0.5 && vertical > -1)
             {
                 Debug.Log("jump");
                 rb.AddForce(jumpf * Time.deltaTime * Vector3.up);
+                movingSpeed += 5;
             }
+            if (vertical < 0.5) movingSpeed = 10;
             if (degree < 0) degree += 4;
             if (Input.GetKeyDown(KeyCode.A))//left
             {
@@ -87,10 +89,10 @@ public class VikingController : MonoBehaviour
             else transform.localPosition += movingSpeed * Time.deltaTime * Vector3.left;//forward(0, 0, 1)
             animator.SetBool("Run", run);
         }
-        if(vertical < -30)
+        if (vertical < -30)
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(3);
         }
     }
-    
+
 }
